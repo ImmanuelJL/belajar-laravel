@@ -36,7 +36,6 @@ class sg_barang extends Controller
 
     public function update(Request $request, $id){
     	$data = $request->except('_method', '_token');
-
     	model::where('id',$id)->update($data);
 
     	return redirect('barang');
