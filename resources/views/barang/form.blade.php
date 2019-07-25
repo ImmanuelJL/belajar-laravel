@@ -37,6 +37,8 @@
                         <button type="submit" class="btn btn-success">
                             Simpan
                         </button>
+
+                        {{ Form::hidden('updated_by', Auth::user()->id, ['class' => 'form-control']) }}
                     {!! Form::close() !!}
 
                 </div>

@@ -24,6 +24,7 @@
                                 <tr>
                                     <th class="text-center">Nama Barang</th>
                                     <th class="text-center">Jumlah Barang</th>
+                                    <th class="text-center">Terakhir Ubah</th>
                                     <th class="text-center">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -32,6 +33,7 @@
                                     <tr>
                                         <td>{{ $barang->nama_barang }}</td>
                                         <td>{{ $barang->jumlah_barang }}</td>
+                                        <td>{{ $barang->getUpdatedBy->name }}</td>
                                         <td>
                                             <a href="{{ URL::route('barang.edit',$barang->id) }}"><i class="fas fa-edit"></i></a>
                                             <a href="{{ url('barang/destroy/'.$barang->id) }}"><i class="fas fa-trash-alt"></i></a>

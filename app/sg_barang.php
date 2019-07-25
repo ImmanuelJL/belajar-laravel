@@ -11,6 +11,11 @@ class sg_barang extends Model
     protected $fillable = [
     	'nama_barang',
     	'jumlah_barang',
-    	'keterangan'
+    	'keterangan',
+    	'updated_by'
     ];
+
+    public function getUpdatedBy(){
+    	return $this->hasOne(User::class, 'id', 'updated_by');
+    }
 }

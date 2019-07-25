@@ -8,7 +8,7 @@ use App\sg_barang as model;
 class sg_barang extends Controller
 {
     public function index(){
-    	$barangs = model::all();
+    	$barangs = model::with('getUpdatedBy')->get();
 
     	return view('barang.table',compact('barangs'));
     }
