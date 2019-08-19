@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/barang', 'sg_barang');
 Route::get('/barang/destroy/{id}', 'sg_barang@destroy');
+Route::resource('/transaksi', 'sg_transaksi');
+Route::get('/transaksi/destroy/{id}', 'sg_transaksi@destroy');
