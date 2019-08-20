@@ -22,6 +22,10 @@
                         <div class="links">
                             <a href="{{ url('barang') }}">Table Barang</a>
                         </div>
+
+                        <div class="links">
+                            <a href="{{ url('pegawai') }}">Table Pegawai</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -18,5 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/barang', 'sg_barang');
 Route::get('/barang/destroy/{id}', 'sg_barang@destroy');
+Route::resource('/barang', 'sg_barang');
+Route::get('/pegawai/list', 'sg_pegawai@list');
+Route::get('/pegawai/destroy/{id}', 'sg_pegawai@destroy');
+Route::resource('/pegawai', 'sg_pegawai');
