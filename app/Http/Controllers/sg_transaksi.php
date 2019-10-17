@@ -41,27 +41,42 @@ class sg_transaksi extends Controller
     }
 
     public function update(Request $request, $id){
-    	// $data = $request->except('_method', '_token');
-    	// model::where('id',$id)->update($data);
+    	$this->updateSgBarang($request, $id);
 
-    	// $this->updateSgBarang($request);
+        $data = $request->except('_method', '_token');
+    	model::where('id',$id)->update($data);    	
 
-    	// return redirect('transaksi');
+    	return redirect('transaksi');
     }
 
     public function destroy($id){
     	$value = model::where('id',$id);
     	$sg_barang = sg_barang::where('id',$value->value('id_barang'));
 
-    	$sg_barang->update(["jumlah_barang"=>(int) $sg_barang->value('jumlah_barang') - (int) $value->value('jumlah_barang')]);    	
+        if( $value->first()->jenis_transaksi == 'Masuk' ){
+            $sg_barang->update(["jumlah_barang"=>(int) $sg_barang->value('jumlah_barang') - (int) $value->first()->jumlah_barang]);
+        }elseif( $value->first()->jenis_transaksi == 'Keluar' ){
+            $sg_barang->update(["jumlah_barang"=>(int) $sg_barang->value('jumlah_barang') + (int) $value->first()->jumlah_barang]);
+        }
     	model::destroy($id);
 
     	return redirect('transaksi');
     }
 
-    public function updateSgBarang($request){
+    public function updateSgBarang($request, $idTrx=''){
     	$sg_barang = sg_barang::where('id',$request->id_barang);
     	$value = $sg_barang->value('jumlah_barang');
+
+        if( $idTrx != '' ){
+            $trx = model::where('id',$idTrx)->first();            
+            if( $trx->jenis_transaksi == 'Masuk' ){
+                $sg_barang->update(["jumlah_barang"=>(int) $value - (int) $trx->jumlah_barang]);
+            }elseif( $trx->jenis_transaksi == 'Keluar' ){
+                $sg_barang->update(["jumlah_barang"=>(int) $value + (int) $trx->jumlah_barang]);
+            }
+            $value = sg_barang::where('id',$request->id_barang)->value('jumlah_barang');
+        }
+
     	if( $request->jenis_transaksi == 'Masuk' ){
     		$sg_barang->update(["jumlah_barang"=>(int) $value + (int) $request->jumlah_barang]);
     	}elseif( $request->jenis_transaksi == 'Keluar' ){

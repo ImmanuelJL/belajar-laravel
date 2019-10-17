@@ -36,9 +36,11 @@
                             {{ Form::number('jumlah_barang', isset($transaksis->jumlah_barang) ? $transaksis->jumlah_barang : null, ['class' => 'form-control']) }}
                         </div>
 
-                        <button type="submit" class="btn btn-success">
-                            Simpan
-                        </button>
+                        <div class="form-group col-xs-12 col-lg-12">
+                            <button type="submit" class="btn btn-success">
+                                Simpan
+                            </button>
+                        </div>
                     {!! Form::close() !!}
 
                 </div>

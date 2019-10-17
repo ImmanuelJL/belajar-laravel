@@ -34,10 +34,11 @@
                             {{ Form::textarea('keterangan', isset($barangs->keterangan) ? $barangs->keterangan : null, ['class' => 'form-control']) }}
                         </div>
 
-                        <button type="submit" class="btn btn-success">
-                            Simpan
-                        </button>
-
+                        <div class="form-group col-xs-12 col-lg-12">
+                            <button type="submit" class="btn btn-success">
+                                Simpan
+                            </button>
+                        </div>
                         {{ Form::hidden('updated_by', Auth::user()->id, ['class' => 'form-control']) }}
                     {!! Form::close() !!}
 
