@@ -16,7 +16,7 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
-    'label_welcome_header' => 'Welcome',
-    'label_welcome_content' => 'This is English.',
+    'label_welcome_header' => 'Selamat Datang',
+    'label_welcome_content' => 'Ini adalah Bahasa.',
 
 ];

@@ -23,3 +23,13 @@ Route::resource('/barang', 'sg_barang');
 Route::get('/pegawai/list', 'sg_pegawai@list');
 Route::get('/pegawai/destroy/{id}', 'sg_pegawai@destroy');
 Route::resource('/pegawai', 'sg_pegawai');
+
+Route::group(['prefix' => '{locale}'], function() {
+	if (in_array(Request::segment(1), config('app.locales'))) {
+        App::setLocale(Request::segment(1));
+
+        Route::get('/multi-bahasa', function () {
+		    return view('multi-bahasa');
+		});
+    }
+});

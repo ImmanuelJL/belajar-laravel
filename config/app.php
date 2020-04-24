@@ -229,4 +229,6 @@ return [
 
     ],
 
+    'locales' => ['id', 'en'],
+
 ];
