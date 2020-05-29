@@ -22,3 +22,12 @@ Route::resource('/barang', 'sg_barang');
 Route::get('/barang/destroy/{id}', 'sg_barang@destroy');
 Route::resource('/transaksi', 'sg_transaksi');
 Route::get('/transaksi/destroy/{id}', 'sg_transaksi@destroy');
+
+Route::get('/restricted-page', function () {
+    return view('restricted-page');
+});
+
+Route::group(['prefix' => '', 'middleware' => ['role']], function() {
+    Route::resource('/user', 'sg_user');
+	Route::get('/user/destroy/{id}', 'sg_user@destroy');
+});
