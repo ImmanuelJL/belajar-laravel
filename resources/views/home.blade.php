@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <center><h1>Belajar - Laravel</h1></center>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,19 +16,7 @@
 
                     <div class="content">
                         <div class="title m-b-md">
-                            Selamat Datang, {{ Auth::user()->name }}
-                        </div>
-
-                        <div class="links">
-                            <a href="{{ url('barang') }}">Table Barang</a>
-                        </div>
-
-                        <div class="links">
-                            <a href="{{ url('transaksi') }}">Table Transaksi</a>
-                        </div>
-
-                        <div class="links">
-                            <a href="{{ url('user') }}">Table User</a>
+                            Selamat Datang, <strong>{{ Auth::user()->name }}</strong>
                         </div>
                     </div>
                 </div>

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Table Transaksi</div>
+                <center><h1>Table Transaksi</h1></center>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -39,8 +39,8 @@
                                         <td>{{ $transaksi->getCreatedBy->name }}</td>
                                         <td>{{ isset($transaksi->getUpdatedBy) ? $transaksi->getUpdatedBy->name : '-' }}</td>
                                         <td>
-                                            <a href="{{ URL::route('transaksi.edit',$transaksi->id) }}"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ url('transaksi/destroy/'.$transaksi->id) }}"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ URL::route('transaksi.edit',$transaksi->id) }}"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('transaksi/destroy/'.$transaksi->id) }}"><i class="fa fa-trash red-color"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Table User</div>
+                <center><h1>Table User</h1></center>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -35,8 +35,8 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->role }}</td>
                                         <td>
-                                            <a href="{{ URL::route('user.edit',$user->id) }}"><i class="fas fa-edit"></i></a>
-                                            <a href="{{ url('user/destroy/'.$user->id) }}"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ URL::route('user.edit',$user->id) }}"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('user/destroy/'.$user->id) }}"><i class="fa fa-trash red-color"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

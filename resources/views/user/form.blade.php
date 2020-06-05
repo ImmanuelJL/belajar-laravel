@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Table User</div>
+                <center><h1>Table User</h1></center>
 
                 <div class="card-body">
                     @if (session('status'))
