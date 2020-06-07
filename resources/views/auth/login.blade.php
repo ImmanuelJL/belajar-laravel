@@ -45,7 +45,7 @@
                                 <span class="input-group-addon"><i class="fa fa-lock"  ></i></span>
                                 <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password" placeholder="Password">
                             </div>
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <span class="pull-right">
                                     @if (Route::has('password.request'))
                                         <a href="{{ route('password.request') }}">
@@ -53,7 +53,7 @@
                                         </a>
                                     @endif
                                 </span>
-                            </div> --}}
+                            </div>
                              
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Login') }}

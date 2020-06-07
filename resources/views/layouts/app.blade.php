@@ -31,13 +31,15 @@
             padding: 15px 50px 5px 50px;
             float: right;
             font-size: 16px;">
-                <a class="btn btn-danger square-btn-adjust" href="{{ route('logout') }}"
-                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+                @if( Auth::check() )
+                    <a class="btn btn-danger square-btn-adjust" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endif
             </div>
         </nav>   
         <!-- /. NAV TOP  -->
@@ -47,15 +49,17 @@
                     <li class="text-center">
                         <img src="{{ asset('assets/img/find_user.png') }}" class="user-image img-responsive"/>
                     </li>
-                    <li>
-                        <a href="{{ url('barang') }}"><i class="fa fa-desktop fa-3x"></i>Table Barang</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('transaksi') }}"><i class="fa fa-qrcode fa-3x"></i>Table Transaksi</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('user') }}"><i class="fa fa-bar-chart-o fa-3x"></i>Table User</a>
-                    </li>
+                    @if( Auth::check() )
+                        <li>
+                            <a href="{{ url('barang') }}"><i class="fa fa-desktop fa-3x"></i>Table Barang</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('transaksi') }}"><i class="fa fa-qrcode fa-3x"></i>Table Transaksi</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('user') }}"><i class="fa fa-bar-chart-o fa-3x"></i>Table User</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </nav>  
