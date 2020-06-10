@@ -103,8 +103,8 @@ class sg_transaksi extends Controller
         }
 
         Excel::create('export-to-excel', function($excel) use ($data_array) {
-            $excel->setTitle('Customer Data');
-            $excel->sheet('Customer Data', function($sheet) use ($data_array){
+            $excel->setTitle('Transaksi Data');
+            $excel->sheet('Transaksi Data', function($sheet) use ($data_array){
                 $sheet->fromArray($data_array, null, 'A1', false, false);
             });
         })->export('csv');
