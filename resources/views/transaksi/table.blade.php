@@ -18,6 +18,9 @@
                         <a class="btn btn-primary" href="{{ url('transaksi/create') }}">
                             Tambah Data
                         </a>
+                        <a class="btn btn-success" href="{{ url('transaksi/export') }}">
+                            Export to Excel
+                        </a>
                         <p></p>
                         <table class="table table-hover table-striped table-bordered">
                             <thead>
