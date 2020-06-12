@@ -22,15 +22,17 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('barang/update/{id}', 'Api\sg_barang@update');
     Route::delete('barang/delete/{id}', 'Api\sg_barang@delete');
 
-    Route::post('user', 'Api\sg_user@index');
-    Route::put('user/store', 'Api\sg_user@store');
-    Route::post('user/edit/{id}', 'Api\sg_user@edit');
-    Route::post('user/update/{id}', 'Api\sg_user@update');
-    Route::delete('user/delete/{id}', 'Api\sg_user@delete');
-
     Route::post('transaksi', 'Api\sg_transaksi@index');
     Route::put('transaksi/store', 'Api\sg_transaksi@store');
     Route::post('transaksi/edit/{id}', 'Api\sg_transaksi@edit');
     Route::post('transaksi/update/{id}', 'Api\sg_transaksi@update');
     Route::delete('transaksi/delete/{id}', 'Api\sg_transaksi@delete');
+
+    Route::group(['prefix' => '', 'middleware' => ['role']], function() {
+	    Route::post('user', 'Api\sg_user@index');
+	    Route::put('user/store', 'Api\sg_user@store');
+	    Route::post('user/edit/{id}', 'Api\sg_user@edit');
+	    Route::post('user/update/{id}', 'Api\sg_user@update');
+	    Route::delete('user/delete/{id}', 'Api\sg_user@delete');
+	});
 });

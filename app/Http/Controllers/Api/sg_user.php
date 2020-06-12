@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\User as model;
 use Auth;
 
@@ -24,7 +25,12 @@ class sg_user extends Controller
 		    'role' => 'required',
 	    ]);
 
-    	model::create($request->all());
+    	model::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
 
     	return response()->json(['success' => true], 200);
     }
@@ -54,7 +60,21 @@ class sg_user extends Controller
     	}
 
     	$data = $request->except('_method', '_token', 'password_confirmation');
-    	model::where('id',$id)->update($data);
+
+    	if(isset($request->password) && isset($request->password_confirmation) && $request->password !== '' && $request->password_confirmation !== ''){
+    		model::where('id',$id)->update([
+	            'name' => $request->name,
+	            'email' => $request->email,
+	            'password' => Hash::make($request->password),
+	            'role' => $request->role,
+	        ]);
+    	}else{
+    		model::where('id',$id)->update([
+	            'name' => $request->name,
+	            'email' => $request->email,
+	            'role' => $request->role,
+	        ]);
+    	}
 
     	return response()->json(['success' => true], 200);
     }

@@ -55,12 +55,20 @@ class sg_user extends Controller
     		return \Redirect::back()->with('status','Error, Password Confirmation Not Match.');
     	}
 
-    	model::where('id',$id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-        ]);
+    	if(isset($request->password) && isset($request->password_confirmation) && $request->password !== '' && $request->password_confirmation !== ''){
+            model::where('id',$id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+        }else{
+            model::where('id',$id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role' => $request->role,
+            ]);
+        }
 
     	return redirect('user');
     }
