@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\sg_barang as model;
+use App\User as model;
 use Auth;
 
-class sg_barang extends Controller
+class sg_user extends Controller
 {
     public function index(){
-    	$data = model::with('getUpdatedBy')->get();
+    	$data = model::all();
     	$success['data'] =  $data;
         
         return response()->json(['success' => $success], 200);
@@ -18,11 +18,11 @@ class sg_barang extends Controller
 
     public function store(Request $request){
     	$validatedData = $request->validate([
-	        'nama_barang' => 'required|max:255',
-	        'jumlah_barang' => 'required',
+	        'name' => 'required|max:255',
+	        'email' => 'email',
+		    'password' => 'required|confirmed|min:6',
+		    'role' => 'required',
 	    ]);
-
-	    $request['updated_by'] = Auth::user()->id;
 
     	model::create($request->all());
 
@@ -37,14 +37,23 @@ class sg_barang extends Controller
     }
 
     public function update(Request $request, $id){
-    	$validatedData = $request->validate([
-	        'nama_barang' => 'required|max:255',
-	        'jumlah_barang' => 'required',
-	    ]);
 
-	    $request['updated_by'] = Auth::user()->id;
+    	if(isset($request->password) && isset($request->password_confirmation) && $request->password !== '' && $request->password_confirmation !== ''){
+    		$validatedData = $request->validate([
+		        'name' => 'required|max:255',
+		        'email' => 'email',
+			    'password' => 'required|confirmed|min:6',
+			    'role' => 'required',
+		    ]);
+    	}else{
+    		$validatedData = $request->validate([
+		        'name' => 'required|max:255',
+		        'email' => 'email',
+			    'role' => 'required',
+		    ]);
+    	}
 
-    	$data = $request->except('_method', '_token');
+    	$data = $request->except('_method', '_token', 'password_confirmation');
     	model::where('id',$id)->update($data);
 
     	return response()->json(['success' => true], 200);
