@@ -84,5 +84,6 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <!-- METISMENU SCRIPTS -->
     <script src="{{ asset('assets/js/jquery.metisMenu.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

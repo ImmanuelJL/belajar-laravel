@@ -18,6 +18,24 @@
                         <a class="btn btn-primary" href="{{ url('barang/create') }}">
                             Tambah Data
                         </a>
+                        <a class="btn btn-success toggle-import-form" href="javascript:;">
+                            Import from Excel
+                        </a>
+                        {!! Form::model('', ['url' => url('/barang/import'), 'method' => 'post', 'enctype'=>'multipart/form-data', 'id'=>'import-form']) !!}
+                            {{ csrf_field() }}
+                            </br>
+                            <div class="form-group col-xs-12 col-lg-6">
+                                <a class="btn btn-primary" href="{{ url('csv-template/import-template.csv') }}" download>
+                                    Download Import Template
+                                </a>
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-12">
+                                {{ Form::file('import', ['class' => 'form-control', 'required']) }}
+                            </div>
+                            <div class="form-group col-xs-12 col-lg-12">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        {!! Form::close() !!}
                         <p></p>
                         <table class="table table-hover table-striped table-bordered">
                             <thead>
@@ -50,3 +68,15 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#import-form').hide();
+
+            $('.toggle-import-form').click(function(){
+                $('#import-form').slideToggle();
+            });
+        });
+    </script>
+@endpush

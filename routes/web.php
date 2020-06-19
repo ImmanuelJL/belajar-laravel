@@ -19,6 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/barang/import', 'sg_barang@import');
 Route::get('/barang/destroy/{id}', 'sg_barang@destroy');
 Route::resource('/barang', 'sg_barang');
 Route::get('/transaksi/export', 'sg_transaksi@export');

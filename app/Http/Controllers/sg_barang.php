@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\sg_barang as model;
+use Excel;
+use Auth;
 
 class sg_barang extends Controller
 {
@@ -45,5 +47,19 @@ class sg_barang extends Controller
     	model::destroy($id);
 
     	return redirect('barang');
+    }
+
+    public function import(Request $request){
+        Excel::load($request->file('import')->getRealPath(), function ($reader){
+            foreach ($reader->toArray() as $key => $row) {
+                $data['nama_barang'] = (isset($row['nama_barang']) && $row['nama_barang']!='') ? $row['nama_barang'] : null;
+                $data['jumlah_barang'] = (isset($row['jumlah_barang']) && $row['jumlah_barang']!='') ? $row['jumlah_barang'] : null;
+                $data['keterangan'] = (isset($row['keterangan']) && $row['keterangan']!='') ? $row['keterangan'] : null;
+                $data['updated_by'] = Auth::user()->id;
+                model::create($data);
+            }
+        });
+
+        return redirect('barang');
     }
 }
