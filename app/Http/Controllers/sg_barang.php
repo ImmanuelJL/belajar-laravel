@@ -9,6 +9,10 @@ use Auth;
 
 class sg_barang extends Controller
 {
+    public function __construct(){
+        $this->Hashids = new \Hashids\Hashids( env('MY_SECRET_SALT_KEY','MySecretSalt') );
+    }
+
     public function index(){
     	$barangs = model::with('getUpdatedBy')->get();
 
@@ -30,6 +34,8 @@ class sg_barang extends Controller
     }
 
     public function edit($id){
+        $id = $this->Hashids->decode($id)[0];
+
     	$editForm = true;
     	$barangs = model::find($id);
 
@@ -37,6 +43,8 @@ class sg_barang extends Controller
     }
 
     public function update(Request $request, $id){
+        $id = $this->Hashids->decode($id)[0];
+
     	$data = $request->except('_method', '_token');
     	model::where('id',$id)->update($data);
 
@@ -44,6 +52,8 @@ class sg_barang extends Controller
     }
 
     public function destroy($id){
+        $id = $this->Hashids->decode($id)[0];
+
     	model::destroy($id);
 
     	return redirect('barang');

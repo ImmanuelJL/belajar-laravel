@@ -18,4 +18,10 @@ class sg_barang extends Model
     public function getUpdatedBy(){
     	return $this->hasOne(User::class, 'id', 'updated_by');
     }
+
+    public function getIdAttribute(){
+        $hashids = new \Hashids\Hashids( env('MY_SECRET_SALT_KEY','MySecretSalt') );
+
+        return $hashids->encode($this->attributes['id']);
+    }
 }
