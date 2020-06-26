@@ -20,7 +20,7 @@ class sg_barang extends Model
     }
 
     public function getIdAttribute(){
-        if( \Request::segment(1) === 'barang' ){
+        if( \Request::segment(1) === 'barang' || (\Request::segment(1) === 'api' && \Request::segment(2) === 'barang') ){
             $hashids = new \Hashids\Hashids( env('MY_SECRET_SALT_KEY','MySecretSalt') );
 
             return $hashids->encode($this->attributes['id']);
